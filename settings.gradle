@@ -1,0 +1,2 @@
+include ':app', ':manager', ':plugin', ':constant', ':host-lib'
+rootProject.name='ShadowTest'
