@@ -1,2 +1,28 @@
-include ':app', ':manager', ':plugin', ':constant', ':host-lib'
-rootProject.name='ShadowTest'
+rootProject.name = 'ShadowTest'
+
+if (!System.getenv().containsKey("ANDROID_HOME")) {
+    throw new RuntimeException("未定义ANDROID_HOME环境变量。" +
+            "原因：Android Studio目前不支持自动为复合构建中的子构建自动创建local.properties文件。" +
+            "注意：新增环境变量后，一般不会立即生效，最简单的办法是重启电脑。")
+}
+
+includeBuild 'sdk/coding'
+includeBuild 'sdk/core'
+includeBuild 'sdk/dynamic'
+
+
+includeAll()
+
+def includeAll() {
+    include 'app',
+            'constant',
+            'host-lib',
+            'manager',
+            'plugin'
+    project(':constant').projectDir = file('source/constant')
+    project(':host-lib').projectDir = file('source/host-lib')
+    project(':manager').projectDir = file('source/manager')
+    project(':plugin').projectDir = file('source/plugin')
+
+}
+

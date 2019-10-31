@@ -11,11 +11,11 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$build_gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
     }
 }
 
 allprojects {
+    addRepos(repositories);
     repositories {
         google()
         jcenter()
@@ -27,4 +27,26 @@ apply from: 'buildScripts/gradle/common.gradle'
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+    dependsOn gradle.includedBuild('coding').task(':checks:clean')
+    dependsOn gradle.includedBuild('coding').task(':lint:clean')
+    dependsOn gradle.includedBuild('core').task(':gradle-plugin:clean')
+    dependsOn gradle.includedBuild('core').task(':common:clean')
+    dependsOn gradle.includedBuild('core').task(':loader:clean')
+    dependsOn gradle.includedBuild('core').task(':manager:clean')
+    dependsOn gradle.includedBuild('core').task(':runtime:clean')
+    dependsOn gradle.includedBuild('core').task(':transform:clean')
+    dependsOn gradle.includedBuild('core').task(':transform-kit:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-host:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-loader:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-loader-impl:clean')
+    dependsOn gradle.includedBuild('dynamic').task(':dynamic-manager:clean')
 }
+
+
+def addRepos(RepositoryHandler handler) {
+    //阿里云地址  备用
+//    handler.maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+//    handler.maven { url "http://maven.aliyun.com/nexus/content/repositories/jcenter" }
+}
+
+ext.addRepos = this.&addRepos

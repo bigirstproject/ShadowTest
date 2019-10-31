@@ -18,11 +18,11 @@ android {
 
     sourceSets {
         debug {
-            assets.srcDir('build/generated/assets/sample-manager/debug/')
+            assets.srcDir('build/generated/assets/manager/debug/')
             assets.srcDir('build/generated/assets/plugin-zip/debug/')
         }
         release {
-            assets.srcDir('build/generated/assets/sample-manager/release/')
+            assets.srcDir('build/generated/assets/manager/release/')
             assets.srcDir('build/generated/assets/plugin-zip/release/')
         }
     }
@@ -41,9 +41,9 @@ dependencies {
     implementation 'commons-io:commons-io:2.5'//sample-host从assets中复制插件用的
     implementation 'org.slf4j:slf4j-api:1.7.25'
 
-//    implementation 'com.tencent.shadow.coding:lint'
-//    implementation 'com.tencent.shadow.core:common'
-//    implementation 'com.tencent.shadow.dynamic:dynamic-host'
+
+    implementation 'com.tencent.shadow.core:common'
+    implementation 'com.tencent.shadow.dynamic:dynamic-host'
 
     implementation project(':constant')
     implementation project(':host-lib')
