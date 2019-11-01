@@ -15,7 +15,7 @@ buildscript {
 }
 
 allprojects {
-    addRepos(repositories);
+    addRepos(repositories)
     repositories {
         google()
         jcenter()

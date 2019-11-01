@@ -18,11 +18,16 @@ def includeAll() {
             'constant',
             'host-lib',
             'manager',
-            'plugin'
+            'app-lib',
+            'loaders',
+           'pinnedheaderexpandablelistview',
+           'slidingmenu'
     project(':constant').projectDir = file('source/constant')
     project(':host-lib').projectDir = file('source/host-lib')
     project(':manager').projectDir = file('source/manager')
-    project(':plugin').projectDir = file('source/plugin')
-
+    project(':loaders').projectDir = file('source/plugins/loaders')
+    project(':app-lib').projectDir = file('source/plugins/app-lib')
+    project(':pinnedheaderexpandablelistview').projectDir = file('source/plugins/third-party/pinnedheaderexpandablelistview')
+    project(':slidingmenu').projectDir = file('source/plugins/third-party/slidingmenu')
 }
 
