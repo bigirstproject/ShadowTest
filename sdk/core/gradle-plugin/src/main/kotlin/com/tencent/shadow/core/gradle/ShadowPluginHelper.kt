@@ -101,6 +101,7 @@ open class ShadowPluginHelper {
             val loaderFileParent = splitList[splitList.lastIndex].replace("assemble", "").toLowerCase()
             val loaderFile = File("${project.rootDir}" +
                     "/${extension.loaderApkProjectPath}/build/outputs/apk/$loaderFileParent/$loaderApkName")
+            println("============= checkExist  = "+checkExist +  "    loaderFile = "+loaderFile.absolutePath +"     loaderFile.exists() = "+ loaderFile.exists())
             if (checkExist && !loaderFile.exists()) {
                 throw IllegalArgumentException(loaderFile.absolutePath + " , loader file not exist...")
             }

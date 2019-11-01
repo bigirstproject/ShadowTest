@@ -84,6 +84,13 @@
 
 
         </activity>
+
+        <activity
+            android:name="com.sunsun.shadowtest.PluginLoadActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>

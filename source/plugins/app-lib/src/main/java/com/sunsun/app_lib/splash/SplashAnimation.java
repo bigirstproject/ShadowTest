@@ -21,7 +21,8 @@ package com.sunsun.app_lib.splash;
 import android.content.Context;
 import android.os.Handler;
 
-import com.tencent.shadow.sample.plugin.app.lib.gallery.util.ToastUtil;
+import com.sunsun.app_lib.util.ToastUtil;
+
 
 public class SplashAnimation implements ISplashAnimation{
 

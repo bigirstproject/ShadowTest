@@ -21,11 +21,14 @@ package com.sunsun.shadowtest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sunsun.constant.Constant;
 import com.tencent.shadow.dynamic.host.EnterCallback;
+
+import java.io.File;
 
 
 public class PluginLoadActivity extends Activity {
@@ -51,7 +54,9 @@ public class PluginLoadActivity extends Activity {
         PluginHelper.getInstance().singlePool.execute(new Runnable() {
             @Override
             public void run() {
-                HostApplication.getApp().loadPluginManager(PluginHelper.getInstance().pluginManagerFile);
+                File pluginManagerFile  =   PluginHelper.getInstance().pluginManagerFile;
+                Log.d("PluginLoadActivity", pluginManagerFile.exists()+"    "+pluginManagerFile.getAbsolutePath());
+                HostApplication.getApp().loadPluginManager(pluginManagerFile);
 
                 Bundle bundle = new Bundle();
                 bundle.putString(Constant.KEY_PLUGIN_ZIP_PATH, PluginHelper.getInstance().pluginZipFile.getAbsolutePath());

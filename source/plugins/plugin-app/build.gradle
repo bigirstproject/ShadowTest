@@ -1,0 +1,74 @@
+apply from: "commonbuild.gradle"
+
+android {
+    defaultConfig {
+        applicationId project.SAMPLE_HOST_APP_APPLICATION_ID
+    }
+}
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.tencent.shadow.core:runtime-debug'
+        classpath 'com.tencent.shadow.core:gradle-plugin'
+        classpath 'org.javassist:javassist:3.22.0-GA'
+    }
+}
+
+apply plugin: 'com.tencent.shadow.plugin'
+
+
+shadow {
+    transform {
+//        useHostContext = ['abc']
+    }
+
+    packagePlugin {
+        pluginTypes {
+            debug {
+                loaderApkConfig = new Tuple2('sample-loader-debug.apk', ':sample-loader:assembleDebug')
+                runtimeApkConfig = new Tuple2('runtime-debug.apk', ':runtime:assembleDebug')
+                pluginApks {
+                    pluginApk1 {
+                        businessName = 'plugin-app'
+                        partKey = 'plugin-app'
+                        buildTask = ':plugin-app:assembleDebug'
+                        apkName = 'plugin-app-debug.apk'
+                        apkPath = 'source/plugins/plugin-app/build/outputs/apk/debug/plugin-app-debug.apk'
+                        hostWhiteList = ["com.sunsun.host_lib"]
+                    }
+                }
+            }
+
+            release {
+                loaderApkConfig = new Tuple2('sample-loader-release.apk', ':sample-loader:assembleRelease')
+                runtimeApkConfig = new Tuple2('runtime-release.apk', ':runtime:assembleRelease')
+                pluginApks {
+                    pluginApk1 {
+                        businessName = 'plugin-app'
+                        partKey = 'plugin-app'
+                        buildTask = ':plugin-app:assembleRelease'
+                        apkName = 'plugin-app-release.apk'
+                        apkPath = 'source/plugins/plugin-app/build/outputs/apk/release/plugin-app-release.apk'
+                        hostWhiteList = ["com.sunsun.host_lib"]
+                    }
+                }
+            }
+        }
+
+        loaderApkProjectPath = '/source/plugins/sample-loader'
+        runtimeApkProjectPath = '/source/plugins/runtime'
+
+        archiveSuffix = System.getenv("PluginSuffix") ?: ""
+        archivePrefix = 'plugin'
+        destinationDir = "${getRootProject().getBuildDir()}"
+
+        version = 4
+        compactVersion = [1, 2, 3]
+        uuidNickName = "1.1.5"
+    }
+}
